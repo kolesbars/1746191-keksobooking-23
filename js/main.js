@@ -4,7 +4,7 @@ const getRandomInteger = (from, to) => {
     // Источник: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
   }
   return 'Некорректный диапазон';
-}
+};
 
 getRandomInteger(1,10);
 
@@ -15,6 +15,6 @@ const getRandomFloat = (from, to, point) => {
     https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed */
   }
   return 'Некорректный диапазон';
-}
+};
 
 getRandomFloat(1,10,3);
