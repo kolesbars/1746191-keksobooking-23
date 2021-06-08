@@ -1,34 +1,10 @@
-function getRandomPositiveFloat (first, second, digits = 1) {
-
-  const lower = Math.min(Math.abs(first), Math.abs(second));
-  const upper = Math.max(Math.abs(first), Math.abs(second));
-
-  const result = Math.random() * (upper - lower) + lower;
-
-
-  return result.toFixed(digits);
-}
-
-function getRandomPositiveInteger (first, second) {
-
-  const lower = Math.ceil(Math.min(Math.abs(first), Math.abs(second)));
-  const upper = Math.floor(Math.max(Math.abs(first), Math.abs(second)));
-
-  const result = Math.random() * (upper - lower + 1) + lower;
-
-  return Math.floor(result);
-}
-
 const TITLES = [
   'вариант', 'вариант получше' ,'лучший вариант' ,'топ за свои деньги' ,'лучше многих' ,'такого вы нигде не найдете',
 ];
 const AD_TYPES = [
   'palace', 'flat', 'house', 'bungalow', 'hotel',
 ];
-const CHECKIN_TIME = [
-  '12:00', '13:00', '14:00',
-];
-const CHECKOUT_TIME = [
+const TIMES = [
   '12:00', '13:00', '14:00',
 ];
 const FEATURES = [
@@ -47,20 +23,49 @@ const DESCRIPTIONS = [
   'Апарт-отель Browar Lubicz Residence расположен в Кракове, Малопольском воеводстве, в 1,5 км от Мариацкого костела.',
   'К услугам гостей апарт-отеля Vanilla стильные, элегантные апартаменты с бесплатным Wi-Fi и проводным доступом в интернет. В числе стандартных удобств — телевизор со светодиодной подсветкой.',
 ];
+const LAT_MIN_VALUE = 35.65;
+const LAT_MAX_VALUE = 35.7;
+const LNG_MIN_VALUE = 139.7;
+const LNG_MAX_VALUE = 139.8;
+const ADVERTISEMENTS_NUMBER =10;
+
+const getRandomPositiveFloat = (first, second, digits = 1) => {
+
+  const lower = Math.min(Math.abs(first), Math.abs(second));
+  const upper = Math.max(Math.abs(first), Math.abs(second));
+
+  const result = Math.random() * (upper - lower) + lower;
+
+  return result.toFixed(digits);
+};
+
+const getRandomPositiveInteger = (first, second) => {
+
+  const lower = Math.ceil(Math.min(Math.abs(first), Math.abs(second)));
+  const upper = Math.floor(Math.max(Math.abs(first), Math.abs(second)));
+
+  const result = Math.random() * (upper - lower + 1) + lower;
+
+  return Math.floor(result);
+};
+
+
 const avatarNumbers = [0];
 
 const createAd = () => {
-
   let plug = getRandomPositiveInteger(1, 10);
   while (avatarNumbers.some((value) => value === plug)) {
     plug = getRandomPositiveInteger(1, 10);
   }
   avatarNumbers.push(plug);
-  const lat = getRandomPositiveFloat (35.65, 35.7, 5);
-  const lng = getRandomPositiveFloat (139.7, 139.8, 5);
+  if (plug < 10) {
+    plug = `0${plug.toString()}`;
+  }
+  const lat = getRandomPositiveFloat (LAT_MIN_VALUE, LAT_MAX_VALUE, 5);
+  const lng = getRandomPositiveFloat (LNG_MIN_VALUE, LNG_MAX_VALUE, 5);
   return {
     author: {
-      avatar: `img/avatars/user0${  plug  }.png`, // как я понял, ошибка:  не 8 а 10 должно быть
+      avatar: `img/avatars/user${plug}.png`,
     },
     location: {
       lat: lat,
@@ -68,20 +73,20 @@ const createAd = () => {
     },
     offer: {
       title: TITLES[getRandomPositiveInteger(0, TITLES.length-1)],
-      address: `${lat  }, ${  lng}`, // не совсем понял из ТЗ, что тут должно быть
+      address: `${lat}, ${lng}`,
       price: getRandomPositiveInteger(1, 100000),
       type: AD_TYPES[getRandomPositiveInteger(0, AD_TYPES.length-1)],
       rooms: getRandomPositiveInteger(1, 10),
       guests: getRandomPositiveInteger(1, 100),
-      checkin: CHECKIN_TIME[getRandomPositiveInteger(0, CHECKIN_TIME.length-1)],
-      checkout: CHECKOUT_TIME[getRandomPositiveInteger(0, CHECKOUT_TIME.length-1)],
+      checkin: TIMES[getRandomPositiveInteger(0, TIMES.length-1)],
+      checkout: TIMES[getRandomPositiveInteger(0, TIMES.length-1)],
       features: FEATURES.slice(0, getRandomPositiveInteger(0, FEATURES.length)),
       description: DESCRIPTIONS[getRandomPositiveInteger(0, DESCRIPTIONS.length-1)],
       photos: PHOTOS.slice(0, getRandomPositiveInteger(0, PHOTOS.length)),
     },
+  };
+};
 
-  };};
-
-const ads = new Array(10).fill(null).map(() => createAd());
-
+const ads = new Array(ADVERTISEMENTS_NUMBER).fill(null).map(() => createAd());
+// eslint-disable-next-line no-console
 console.log(ads);
