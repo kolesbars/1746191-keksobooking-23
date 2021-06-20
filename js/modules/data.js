@@ -32,7 +32,7 @@ const LNG_MAX_VALUE = 139.8;
 const ADVERTISEMENTS_NUMBER =10;
 
 const avatarNumbers = [0];
-const createAd = () => {
+const getAvatarNumber = () => { // решил вынести отдельно, чтобы не засорять лишним createAd
   let avatarNumber = getRandomPositiveInteger(1, 10);
   while (avatarNumbers.some((value) => value === avatarNumber)) {
     avatarNumber = getRandomPositiveInteger(1, 10);
@@ -41,11 +41,15 @@ const createAd = () => {
   if (avatarNumber < 10) {
     avatarNumber = `0${avatarNumber.toString()}`;
   }
+  return avatarNumber;
+};
+
+const createAd = () => {
   const lat = getRandomPositiveFloat (LAT_MIN_VALUE, LAT_MAX_VALUE, 5);
   const lng = getRandomPositiveFloat (LNG_MIN_VALUE, LNG_MAX_VALUE, 5);
   return {
     author: {
-      avatar: `img/avatars/user${avatarNumber}.png`,
+      avatar: `img/avatars/user${getAvatarNumber()}.png`,
     },
     location: {
       lat: lat,
