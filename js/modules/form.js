@@ -26,16 +26,16 @@ const makeActiveState = () => { // перевод страницы в актив
   adForm.classList.remove('ad-form--disabled');
   filtersForm.classList.remove('ad-form--disabled');
   adFormInputs.forEach((element) => {
-    element.removeAttribute('disabled', '');
+    element.removeAttribute('disabled');
   });
   adFormSelects.forEach((element) => {
-    element.removeAttribute('disabled', '');
+    element.removeAttribute('disabled');
   });
   filtersFormInputs.forEach((element) => {
-    element.removeAttribute('disabled', '');
+    element.removeAttribute('disabled');
   });
   filtersFormSelects.forEach((element) => {
-    element.removeAttribute('disabled', '');
+    element.removeAttribute('disabled');
   });
 };
 
