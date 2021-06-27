@@ -39,10 +39,8 @@ const makeActiveState = () => { // перевод страницы в актив
   });
 };
 
-makeActiveState();
-
 const adFormRoomsNumber = adForm.querySelector('#room_number');
-const adFormGuestsNumber = adForm.querySelector('#capacity')
+const adFormGuestsNumber = adForm.querySelector('#capacity');
 const rooms = adFormRoomsNumber.options;
 const guests = adFormGuestsNumber.options;
 
@@ -53,7 +51,7 @@ if (rooms[0].selected) {
   guests[2].selected = true;
 }
 
-adFormRoomsNumber.addEventListener('change', () => {
+adFormRoomsNumber.addEventListener('change', () => { //валидация полей комнаты-гости
   if (rooms[1].selected) { // выбрано 2 комнаты
     guests[1].removeAttribute('disabled');
     guests[2].removeAttribute('disabled');
@@ -66,17 +64,19 @@ adFormRoomsNumber.addEventListener('change', () => {
     guests[2].removeAttribute('disabled');
     guests[3].setAttribute('disabled', '');
     guests[0].selected = true;
-    } else if (rooms[3].selected) { // выбрано 100 комнат
-      guests[3].removeAttribute('disabled');
-      guests[0].setAttribute('disabled', '');
-      guests[1].setAttribute('disabled', '');
-      guests[2].setAttribute('disabled', '');
-      guests[3].selected = true;
-      } else if (rooms[0].selected) { // выбрана 1 комната
-        guests[0].setAttribute('disabled', '');
-        guests[1].setAttribute('disabled', '');
-        guests[3].setAttribute('disabled', '');
-        guests[2].removeAttribute('disabled');
-        guests[2].selected = true;
-        }
-})
+  } else if (rooms[3].selected) { // выбрано 100 комнат
+    guests[3].removeAttribute('disabled');
+    guests[0].setAttribute('disabled', '');
+    guests[1].setAttribute('disabled', '');
+    guests[2].setAttribute('disabled', '');
+    guests[3].selected = true;
+  } else if (rooms[0].selected) { // выбрана 1 комната
+    guests[0].setAttribute('disabled', '');
+    guests[1].setAttribute('disabled', '');
+    guests[3].setAttribute('disabled', '');
+    guests[2].removeAttribute('disabled');
+    guests[2].selected = true;
+  }
+});
+
+export {makeActiveState, adForm};

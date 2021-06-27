@@ -3,7 +3,6 @@ import { fillWithFeatures, fillWithPhotos} from './util.js';
 
 const templateFragment = document.querySelector('#card').content;
 const template = templateFragment.querySelector('.popup');
-const mapContainer = document.querySelector('.map__canvas');
 const similarAds = ads;
 const getAdType = (type) => {
   switch (type) {
@@ -21,16 +20,15 @@ const getAdType = (type) => {
       return 'Другое';
   }
 };
-
-const fillSimilarAd = () => {
-  const adList = [];
+const fillSimilarAd = () => { //заполняет данными карточку похожего объявления
+  const adsList = [];
   similarAds.forEach((element) => {
-    const similarAd = template.cloneNode(true); // заполняет заголовок
+    const similarAd = template.cloneNode(true);
     const adTitle = similarAd.querySelector('.popup__title');
     if (element.offer.title === '') {
       adTitle.classList.add('hidden');
     }
-    adTitle.textContent = element.offer.title;
+    adTitle.textContent = element.offer.title; // заполняет заголовок
 
     const adAddres = similarAd.querySelector('.popup__text--address'); // заполняет адрес
     if (element.offer.address === '') {
@@ -89,9 +87,9 @@ const fillSimilarAd = () => {
     }
     adAvatar.src = element.author.avatar;
 
-    adList.push(similarAd);
+    adsList.push(similarAd);
   });
-  mapContainer.appendChild(adList[5]);
+  return adsList;
 };
 
-fillSimilarAd();
+export { fillSimilarAd };
