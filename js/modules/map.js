@@ -1,14 +1,18 @@
-import {makeActiveState, adForm} from './form.js';
+import { makeActiveState, adForm } from './form.js';
 import { fillSimilarAd } from './advertisement.js';
+
+const DEFAULT_LAT = 35.6895000;
+const DEFAULT_LNG = 139.6917100;
+const SCALE = 10;
 
 const map = L.map('map-canvas')
   .on('load', () => {
     makeActiveState();
   })
   .setView({
-    lat: 35.6895000,
-    lng: 139.6917100,
-  }, 10);
+    lat: DEFAULT_LAT,
+    lng: DEFAULT_LNG,
+  }, SCALE);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -25,8 +29,8 @@ const mainIcon = L.icon({
 
 const mainMarker = L.marker(
   {
-    lat:35.6895000,
-    lng:139.6917100,
+    lat:DEFAULT_LAT,
+    lng:DEFAULT_LNG,
   },
   {
     draggable: true,
@@ -70,8 +74,8 @@ const createMarker = (latitude, longitude, ad) => { //создает обычн�
 
 const similarAds = fillSimilarAd();
 similarAds.forEach((ad) => {
-  const childrens = ad.children;
-  const adLat = childrens[2].textContent.slice(0, 8);
-  const adLng = childrens[2].textContent.slice(10,19);
+  const similarAdChildren = ad.children;
+  const adLat = similarAdChildren[2].textContent.slice(0, 8);
+  const adLng = similarAdChildren[2].textContent.slice(10,19);
   createMarker(adLat, adLng, ad);
 });
