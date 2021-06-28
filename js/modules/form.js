@@ -79,4 +79,41 @@ adFormRoomsNumber.addEventListener('change', () => { //валидация пол
   }
 });
 
+const adFormType = adForm.querySelector('#type');
+const adFormPrice = adForm.querySelector('#price');
+
+if (adFormType.value === 'flat') {
+  adFormPrice.setAttribute('min', '1000');
+  adFormPrice.setAttribute('placeholder', '1000');
+}
+
+adFormType.addEventListener('change', () => { // валидация поля цены
+  if(adFormType.value === 'palace') {
+    adFormPrice.setAttribute('min', '10000');
+    adFormPrice.setAttribute('placeholder', '10000');
+  } else if (adFormType.value === 'bungalow') {
+    adFormPrice.setAttribute('min', '0');
+    adFormPrice.setAttribute('placeholder', '0');
+  } else if (adFormType.value === 'flat') {
+    adFormPrice.setAttribute('min', '1000');
+    adFormPrice.setAttribute('placeholder', '1000');
+  } else if (adFormType.value === 'house') {
+    adFormPrice.setAttribute('min', '5000');
+    adFormPrice.setAttribute('placeholder', '5000');
+  } else if (adFormType.value === 'hotel') {
+    adFormPrice.setAttribute('min', '3000');
+    adFormPrice.setAttribute('placeholder', '3000');
+  }
+});
+
+const adFormTimeIn = adForm.querySelector('#timein');
+const adFormTimeOut = adForm.querySelector('#timeout');
+
+adFormTimeIn.addEventListener('change', () => { // синхронизация времени заезда и выезда
+  adFormTimeOut.value = adFormTimeIn.value;
+});
+adFormTimeOut.addEventListener('change', () => {
+  adFormTimeIn.value = adFormTimeOut.value;
+});
+
 export {makeActiveState, adForm};
