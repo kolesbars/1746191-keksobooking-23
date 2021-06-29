@@ -1,3 +1,9 @@
+const BUNGALOW_PRICE = 0;
+const FLAT_PRICE = 1000;
+const HOTEL_PRICE = 3000;
+const HOUSE_PRICE = 5000;
+const PALACE_PRICE = 10000;
+
 const adForm = document.querySelector('.ad-form');
 const adFormInputs = adForm.querySelectorAll('input');
 const adFormSelects = adForm.querySelectorAll('select');
@@ -83,26 +89,26 @@ const adFormType = adForm.querySelector('#type');
 const adFormPrice = adForm.querySelector('#price');
 
 if (adFormType.value === 'flat') {
-  adFormPrice.setAttribute('min', '1000');
-  adFormPrice.setAttribute('placeholder', '1000');
+  adFormPrice.setAttribute('min', FLAT_PRICE);
+  adFormPrice.setAttribute('placeholder', FLAT_PRICE);
 }
 
 adFormType.addEventListener('change', () => { // валидация поля цены
   if(adFormType.value === 'palace') {
-    adFormPrice.setAttribute('min', '10000');
-    adFormPrice.setAttribute('placeholder', '10000');
+    adFormPrice.setAttribute('min', PALACE_PRICE);
+    adFormPrice.setAttribute('placeholder', PALACE_PRICE);
   } else if (adFormType.value === 'bungalow') {
-    adFormPrice.setAttribute('min', '0');
-    adFormPrice.setAttribute('placeholder', '0');
+    adFormPrice.setAttribute('min', BUNGALOW_PRICE);
+    adFormPrice.setAttribute('placeholder', BUNGALOW_PRICE);
   } else if (adFormType.value === 'flat') {
-    adFormPrice.setAttribute('min', '1000');
-    adFormPrice.setAttribute('placeholder', '1000');
+    adFormPrice.setAttribute('min', FLAT_PRICE);
+    adFormPrice.setAttribute('placeholder', FLAT_PRICE);
   } else if (adFormType.value === 'house') {
-    adFormPrice.setAttribute('min', '5000');
-    adFormPrice.setAttribute('placeholder', '5000');
+    adFormPrice.setAttribute('min', HOUSE_PRICE);
+    adFormPrice.setAttribute('placeholder', HOUSE_PRICE);
   } else if (adFormType.value === 'hotel') {
-    adFormPrice.setAttribute('min', '3000');
-    adFormPrice.setAttribute('placeholder', '3000');
+    adFormPrice.setAttribute('min', HOTEL_PRICE);
+    adFormPrice.setAttribute('placeholder', HOTEL_PRICE);
   }
 });
 
