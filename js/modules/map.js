@@ -1,5 +1,4 @@
 import { makeActiveState, adForm } from './form.js';
-import { fillSimilarAd } from './advertisement.js';
 
 const DEFAULT_LAT = 35.6895000;
 const DEFAULT_LNG = 139.6917100;
@@ -71,11 +70,13 @@ const createMarker = (latitude, longitude, ad) => { //создает обычн�
     .bindPopup(ad);
 };
 
+const fillMarkers = (foo) => {
+  foo.forEach((ad) => {
+    const similarAdChildren = ad.children;
+    const adLat = similarAdChildren[2].textContent.slice(0, 8);
+    const adLng = similarAdChildren[2].textContent.slice(10,19);
+    createMarker(adLat, adLng, ad);
+  });
+};
 
-const similarAds = fillSimilarAd();
-similarAds.forEach((ad) => {
-  const similarAdChildren = ad.children;
-  const adLat = similarAdChildren[2].textContent.slice(0, 8);
-  const adLng = similarAdChildren[2].textContent.slice(10,19);
-  createMarker(adLat, adLng, ad);
-});
+export {fillMarkers};

@@ -1,9 +1,10 @@
-import { ads } from './data.js';
+
 import { fillWithFeatures, fillWithPhotos} from './util.js';
+import { fillMarkers} from './map.js';
 
 const templateFragment = document.querySelector('#card').content;
 const template = templateFragment.querySelector('.popup');
-const similarAds = ads;
+//const similarAds = ads;
 const getAdType = (type) => {
   switch (type) {
     case 'palace':
@@ -20,7 +21,7 @@ const getAdType = (type) => {
       return 'Другое';
   }
 };
-const fillSimilarAd = () => { //заполняет данными карточку похожего объявления
+const fillSimilarAd = (similarAds) => { //заполняет данными карточку похожего объявления
   const adsList = [];
   similarAds.forEach((element) => {
     const similarAd = template.cloneNode(true);
@@ -92,4 +93,20 @@ const fillSimilarAd = () => { //заполняет данными карточк
   return adsList;
 };
 
-export { fillSimilarAd };
+const getData = (onSuccess) => {
+  fetch('https://23.javascript.pages.academy/keksobooking/data')
+    .then((response) => response.json())
+    .then((advertisements) => {
+      onSuccess(advertisements);
+    })
+    /*.catch(() => {
+      //eslint-disable-next-line no-console
+      console.log('При загрузке данных с сервера произошла ошибка!');
+    });*/
+};
+
+getData((ads) => {
+  //eslint-disable-next-line no-console
+  console.log(ads);
+  fillMarkers(fillSimilarAd(ads));
+});
