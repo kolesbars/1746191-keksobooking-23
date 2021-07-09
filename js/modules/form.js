@@ -1,3 +1,6 @@
+import {setDefaultLatlng, setAdAddres} from './map.js';
+import {sendData} from './server-data.js';
+
 const BUNGALOW_PRICE = 0;
 const FLAT_PRICE = 1000;
 const HOTEL_PRICE = 3000;
@@ -121,5 +124,34 @@ adFormTimeIn.addEventListener('change', () => { // синхронизация в
 adFormTimeOut.addEventListener('change', () => {
   adFormTimeIn.value = adFormTimeOut.value;
 });
+
+const resetForm = () => { //приведение формы в исходное состоние
+  adForm.reset();
+  guests[2].selected = true;
+  setDefaultLatlng();
+  setAdAddres();
+};
+
+const adFormReset = adForm.querySelector('.ad-form__reset');
+adFormReset.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  resetForm();
+});
+
+const submitForm = (onSuccess) => { //отправка формы
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const formData = new FormData(evt.target);
+
+    sendData(
+      () => onSuccess(),
+      () => {},
+      formData,
+    );
+
+  });
+};
+
+submitForm(resetForm);
 
 export {makeActiveState, adForm};

@@ -1,22 +1,4 @@
-const getRandomPositiveFloat = (first, second, digits = 1) => {
-
-  const lower = Math.min(Math.abs(first), Math.abs(second));
-  const upper = Math.max(Math.abs(first), Math.abs(second));
-
-  const result = Math.random() * (upper - lower) + lower;
-
-  return result.toFixed(digits);
-};
-
-const getRandomPositiveInteger = (first, second) => {
-
-  const lower = Math.ceil(Math.min(Math.abs(first), Math.abs(second)));
-  const upper = Math.floor(Math.max(Math.abs(first), Math.abs(second)));
-
-  const result = Math.random() * (upper - lower + 1) + lower;
-
-  return Math.floor(result);
-};
+const ALERT_SHOW_TIME = 5000;
 
 const fillWithFeatures = (featuresData, features, container) => {
   const resultFeaturesList = [];
@@ -49,4 +31,28 @@ const fillWithPhotos = (photoTemplate, container, photoData) => {
   }
 };
 
-export {getRandomPositiveFloat, getRandomPositiveInteger, fillWithFeatures, fillWithPhotos};
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'black';
+  alertContainer.style.color = 'red';
+
+  alertContainer.textContent = message;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+
+const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
+
+export {fillWithFeatures, fillWithPhotos, showAlert, isEscEvent};
