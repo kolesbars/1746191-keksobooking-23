@@ -130,6 +130,8 @@ const resetForm = () => { //приведение формы в исходное 
   guests[2].selected = true;
   setDefaultLatlng();
   setAdAddres();
+  adFormPrice.placeholder = FLAT_PRICE;
+  adFormType.value = 'flat';
 };
 
 const adFormReset = adForm.querySelector('.ad-form__reset');

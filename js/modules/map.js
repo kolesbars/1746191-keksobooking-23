@@ -25,6 +25,7 @@ const mainIcon = L.icon({
   iconSize: [52, 52],
   iconAnchor: [26,52],
 });
+const markerGroup = L.layerGroup().addTo(map);
 
 const mainMarker = L.marker(
   {
@@ -56,5 +57,5 @@ const setAdAddres = () => {
 };
 setAdAddres();
 
-export {map, setDefaultLatlng, setAdAddres};
+export {map, setDefaultLatlng, setAdAddres, markerGroup};
 
