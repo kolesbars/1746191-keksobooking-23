@@ -1,7 +1,9 @@
 import { fillWithFeatures, fillWithPhotos} from './util.js';
 import {markerGroup} from './map.js';
+
 const templateFragment = document.querySelector('#card').content;
-const template = templateFragment.querySelector('.popup');
+const popupTemplate = templateFragment.querySelector('.popup');
+
 const getAdType = (type) => {
   switch (type) {
     case 'palace':
@@ -23,7 +25,7 @@ const fillSimilarAd = (similarAds) => { //заполняет данными ка
   const adsList = [];
   similarAds
     .forEach((element) => {
-      const similarAd = template.cloneNode(true);
+      const similarAd = popupTemplate.cloneNode(true);
       const adTitle = similarAd.querySelector('.popup__title');
       adTitle.textContent = element.offer.title; // заполняет заголовок
 
@@ -50,6 +52,7 @@ const fillSimilarAd = (similarAds) => { //заполняет данными ка
       } else {
         fillWithFeatures(element.offer.features, adFeaturesArray, adFeaturesList);
       }
+
       const adDescription = similarAd.querySelector('.popup__description'); // заполняет описание
       adDescription.textContent = element.offer.description;
 
@@ -60,6 +63,7 @@ const fillSimilarAd = (similarAds) => { //заполняет данными ка
       } else {
         fillWithPhotos(adPhoto, adPhotosContainer, element.offer.photos);
       }
+
       const adAvatar = similarAd.querySelector('.popup__avatar'); //заполняет аватарку
       adAvatar.src = element.author.avatar;
 
@@ -95,6 +99,7 @@ const fillSimilarAd = (similarAds) => { //заполняет данными ка
         iconSize: [40, 40],
         iconAnchor: [20, 40],
       });
+
       const normalMarker = L.marker(
         {
           lat,

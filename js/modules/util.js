@@ -53,24 +53,39 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+const successfulSubmitTemplate = document.querySelector('#success').content;
+const successfulSubmitMessage = successfulSubmitTemplate.querySelector('.success');
+const errorSubmitTemplate = document.querySelector('#error').content;
+const errorSubmitMessage = errorSubmitTemplate.querySelector('.error');
+const errorButton = errorSubmitTemplate.querySelector('.error__button');
+const bodyElement = document.querySelector('body');
+
 const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
-function debounce (callback, timeoutDelay = 500) {
-  let timeoutId;
-  return (...rest) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
-  };
-}
+const onMessageEscKeydown = (evt) => { //закрытие сообщений
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    successfulSubmitMessage.remove();
+    errorSubmitMessage.remove();
+  }
+};
+const  showSuccessfulMessage = () => {
+  bodyElement.appendChild(successfulSubmitMessage);
+  document.addEventListener('keydown', onMessageEscKeydown);
+  window.addEventListener('click', () => {
+    successfulSubmitMessage.remove();
+  });
+};
 
-function throttle (callback, delayBetweenFrames) {
-  let lastTime = 0;
-  return (...rest) => {
-    const now = new Date();
-    if (now - lastTime >= delayBetweenFrames) {
-      callback.apply(this, rest);
-      lastTime = now;
-    }
-  };
-}
-export {fillWithFeatures, fillWithPhotos, showAlert, isEscEvent, debounce, throttle};
+const showErrorMessage = () => {
+  bodyElement.appendChild(errorSubmitMessage);
+  document.addEventListener('keydown', onMessageEscKeydown);
+  errorButton.addEventListener('click', () => {
+    errorSubmitMessage.remove();
+  });
+  window.addEventListener('click', () => {
+    errorSubmitMessage.remove();
+  });
+};
+
+export {fillWithFeatures, fillWithPhotos, showAlert, isEscEvent, showSuccessfulMessage, showErrorMessage};

@@ -1,5 +1,6 @@
 import {setDefaultLatlng, setAdAddres} from './map.js';
 import {sendData} from './server-data.js';
+import {showErrorMessage} from './util.js';
 
 const BUNGALOW_PRICE = 0;
 const FLAT_PRICE = 1000;
@@ -17,6 +18,7 @@ const filtersFormSelects = filtersForm.querySelectorAll('select');
 
 adForm.classList.add('ad-form--disabled'); // неактивное состояние страницы
 filtersForm.classList.add('ad-form--disabled');
+
 adFormInputs.forEach((element) => {
   element.setAttribute('disabled', '');
 });
@@ -147,7 +149,7 @@ const submitForm = (onSuccess) => { //отправка формы
 
     sendData(
       () => onSuccess(),
-      () => {},
+      () => showErrorMessage(),
       formData,
     );
 
