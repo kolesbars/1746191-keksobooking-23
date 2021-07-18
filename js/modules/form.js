@@ -1,6 +1,8 @@
 import {setDefaultLatlng, setAdAddres} from './map.js';
 import {sendData} from './server-data.js';
 import {showErrorMessage} from './util.js';
+import {avatarPreview} from './images.js';
+import {resetFilterForm} from './filter.js';
 
 const BUNGALOW_PRICE = 0;
 const FLAT_PRICE = 1000;
@@ -68,13 +70,13 @@ adFormRoomsNumber.addEventListener('change', () => { //валидация пол
     guests[2].removeAttribute('disabled');
     guests[0].setAttribute('disabled', '');
     guests[3].setAttribute('disabled', '');
-    guests[1].selected = true;
+    guests[2].selected = true;
   } else if (rooms[2].selected) { // выбрано 3 комнаты
     guests[0].removeAttribute('disabled');
     guests[1].removeAttribute('disabled');
     guests[2].removeAttribute('disabled');
     guests[3].setAttribute('disabled', '');
-    guests[0].selected = true;
+    guests[2].selected = true;
   } else if (rooms[3].selected) { // выбрано 100 комнат
     guests[3].removeAttribute('disabled');
     guests[0].setAttribute('disabled', '');
@@ -129,11 +131,17 @@ adFormTimeOut.addEventListener('change', () => {
 
 const resetForm = () => { //приведение формы в исходное состоние
   adForm.reset();
+  resetFilterForm();
   guests[2].selected = true;
   setDefaultLatlng();
   setAdAddres();
   adFormPrice.placeholder = FLAT_PRICE;
   adFormType.value = 'flat';
+  const imagesPreview = document.querySelector('#images-preview');
+  if (imagesPreview) {
+    imagesPreview.remove();
+  }
+  avatarPreview.src = 'img/muffin-grey.svg';
 };
 
 const adFormReset = adForm.querySelector('.ad-form__reset');
