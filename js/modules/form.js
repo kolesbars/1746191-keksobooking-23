@@ -17,7 +17,6 @@ const filtersForm = document.querySelector('.map__filters');
 const filtersFormInputs = filtersForm.querySelectorAll('input');
 const filtersFormSelects = filtersForm.querySelectorAll('select');
 
-
 adForm.classList.add('ad-form--disabled'); // неактивное состояние страницы
 filtersForm.classList.add('ad-form--disabled');
 
@@ -33,7 +32,6 @@ filtersFormInputs.forEach((element) => {
 filtersFormSelects.forEach((element) => {
   element.setAttribute('disabled', '');
 });
-
 
 const makeActiveState = () => { // перевод страницы в активное состояние
   adForm.classList.remove('ad-form--disabled');

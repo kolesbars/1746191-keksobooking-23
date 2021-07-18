@@ -5,7 +5,6 @@ const avatarPreview = document.querySelector('.ad-form-header__preview img');
 const adImagesChooser = document.querySelector('#images');
 const imagesPreviewContainer = document.querySelector('.ad-form__photo');
 
-
 const showPreviewImage = (input, preview) => {
   const file = input.files[0];
   const fileName = file.name.toLowerCase();
