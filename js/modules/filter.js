@@ -59,7 +59,7 @@ const filterByFeatures = (item) => {
   });
 };
 
-const setfilterSimilarAds = (ads) => {
+const setFilterSimilarAds = (ads) => {
   filterForm.addEventListener('change', () => {
     markerGroup.clearLayers();
     const filteredAd = ads.filter((ad) => filterByRooms(ad) && filterByGuests(ad) && filterByTypes(ad) && filterByPrice(ad) && filterByFeatures(ad));
@@ -74,4 +74,4 @@ const resetFilterForm = () => {
   });
 };
 
-export {setfilterSimilarAds, resetFilterForm, ADS_QUANTITY};
+export {setFilterSimilarAds, resetFilterForm, ADS_QUANTITY};

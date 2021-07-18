@@ -1,14 +1,14 @@
-import {setDefaultLatlng, setAdAddres} from './map.js';
+import {setDefaultLatlng, setAdAddress} from './map.js';
 import {sendData} from './server-data.js';
 import {showErrorMessage} from './util.js';
 import {avatarPreview} from './images.js';
 import {resetFilterForm} from './filter.js';
 
-const BUNGALOW_PRICE = 0;
-const FLAT_PRICE = 1000;
-const HOTEL_PRICE = 3000;
-const HOUSE_PRICE = 5000;
-const PALACE_PRICE = 10000;
+const BUNGALOW_PRICE = '0';
+const FLAT_PRICE = '1000';
+const HOTEL_PRICE = '3000';
+const HOUSE_PRICE = '5000';
+const PALACE_PRICE = '10000';
 
 const adForm = document.querySelector('.ad-form');
 const adFormInputs = adForm.querySelectorAll('input');
@@ -132,12 +132,14 @@ const resetForm = () => { //приведение формы в исходное 
   resetFilterForm();
   guests[2].selected = true;
   setDefaultLatlng();
-  setAdAddres();
+  setAdAddress();
   adFormPrice.placeholder = FLAT_PRICE;
   adFormType.value = 'flat';
-  const imagesPreview = document.querySelector('#images-preview');
+  const imagesPreview = document.querySelectorAll('#images-preview');
   if (imagesPreview) {
-    imagesPreview.remove();
+    for (let counter = 0; counter < imagesPreview.length; counter++){
+      imagesPreview[counter].remove();
+    }
   }
   avatarPreview.src = 'img/muffin-grey.svg';
 };

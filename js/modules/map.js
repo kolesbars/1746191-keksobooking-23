@@ -49,14 +49,15 @@ const setDefaultLatlng = () => {
 const defaultLatLng = mainMarker.getLatLng();
 
 const adAddress = adForm.querySelector('#address'); //заполняет адресс в форме передвижением главной метки
-const setAdAddres = () => {
+const setAdAddress = () => {
   adAddress.value = `${defaultLatLng.lat.toFixed(5)}, ${defaultLatLng.lng.toFixed(5)}`;
   mainMarker.on('move', (evt) => {
     const address = evt.target.getLatLng();
     adAddress.value = `${address.lat.toFixed(5)}, ${address.lng.toFixed(5)}`;
   });
 };
-setAdAddres();
 
-export {map, setDefaultLatlng, setAdAddres, markerGroup};
+setAdAddress();
+
+export {map, setDefaultLatlng, setAdAddress, markerGroup};
 
