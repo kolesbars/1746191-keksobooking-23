@@ -1,10 +1,12 @@
 import {fillSimilarAd} from './advertisement.js';
 import {markerGroup} from './map.js';
+import {getData} from './server-data.js';
 
 const TIMEOUT_DELAY = 1000;
 const LOW_PRICE = 10000;
 const HIGH_PRICE = 50000;
 const FILTER_DEFAULT_VALUE = 'any';
+const ADS_QUANTITY = 10;
 
 const filterForm = document.querySelector('.map__filters');
 const typesSelect = filterForm.querySelector('#housing-type');
@@ -65,4 +67,11 @@ const setfilterSimilarAds = (ads) => {
   });
 };
 
-export {setfilterSimilarAds};
+const resetFilterForm = () => {
+  filterForm.reset();
+  getData((ads) => {
+    fillSimilarAd(ads.slice(0, ADS_QUANTITY));
+  });
+};
+
+export {setfilterSimilarAds, resetFilterForm, ADS_QUANTITY};
